@@ -1,9 +1,10 @@
 module.exports = (sequelize, Sequelize) => {
-    return sequelize.define("spot", {
+    const spot = sequelize.define("spot", {
         spotId: {
             type: Sequelize.STRING,
-            unique: true, allowNull:
-                false, primaryKey: true
+            unique: true,
+            allowNull: false,
+            primaryKey: true
         },
         userId: {
             type: Sequelize.INTEGER,
@@ -24,4 +25,14 @@ module.exports = (sequelize, Sequelize) => {
             allowNull: false
         }
     });
+
+    // spot.hasOne(sequelize.models.user, {
+    //     foreignKey: 'userId'
+    // });
+
+    // spot.hasMany(sequelize.models.user, {
+    //     foreignKey: 'lastSpotId'
+    // });
+
+    return spot;
 };

@@ -1,5 +1,5 @@
 module.exports = (sequelize, Sequelize) => {
-    return sequelize.define("user", {
+    const user = sequelize.define("user", {
         userId: {
             type: Sequelize.INTEGER, unique: true, allowNull: false, primaryKey: true, autoIncrement: true
         },
@@ -16,7 +16,9 @@ module.exports = (sequelize, Sequelize) => {
             type: Sequelize.STRING, allowNull: false
         },
         lastSpotId: {
-            type: Sequelize.STRING
+            type: Sequelize.STRING,
+            allowNull: true,
+            // references: {model: sequelize.models.spot, key: 'spotId'}
         },
         userTemperature: {
             type: Sequelize.INTEGER
@@ -31,4 +33,17 @@ module.exports = (sequelize, Sequelize) => {
             type: Sequelize.TIME
         }
     });
+
+    // user.belongsTo(sequelize.models.spot, {
+    //     foreignKey: 'userId'
+    // });
+
+    // user.hasOne(sequelize.models.spot, {
+    //     foreignKey: {
+    //         name: 'lastSpotId',
+    //         type: Sequelize.STRING
+    //     }
+    // });
+
+    return user;
 };
