@@ -1,5 +1,5 @@
 const db = require("../models");
-const User = db.users;
+const Preset = db.presets;
 const Op = db.Sequelize.Op;
 
 // Create and Save a new Tutorial
@@ -12,21 +12,18 @@ exports.create = (req, res) => {
     //     return;
     // }
 
-    // Create a User
-    const user = {
+    // Create a Preset
+    const preset = {
         name: req.body.name,
-        email: req.body.email,
-        password: req.body.password,
-        lastSpotId: req.body.lastSpotId,
-        userTemperature: req.body.userTemperature,
-        userHumidity: req.body.userHumidity,
-        userAirflow: req.body.userAirflow,
-        leavingTime: req.body.leavingTime
+        userId: req.body.userId,
+        temperature: req.body.temperature,
+        humidity: req.body.humidity,
+        airflow: req.body.airflow
 
     };
 
-    // Save User in the database
-    User.create(user)
+    // Save Preset in the database
+    Preset.create(preset)
         .then(data => {
             res.send(data);
         })
@@ -40,10 +37,10 @@ exports.create = (req, res) => {
 
 // Retrieve all Tutorials from the database.
 exports.findAll = (req, res) => {
-    const userId = req.query.userId;
-    var condition = userId ? {userId: {[Op.like]: `%${userId}%`}} : null;
+    const presetId = req.query.presetId;
+    var condition = presetId ? {presetId: {[Op.like]: `%${presetId}%`}} : null;
 
-    User.findAll({where: condition})
+    Preset.findAll({where: condition})
         .then(data => {
             res.send(data);
         })

@@ -1,5 +1,5 @@
 const db = require("../models");
-const User = db.users;
+const Spot = db.spots;
 const Op = db.Sequelize.Op;
 
 // Create and Save a new Tutorial
@@ -12,21 +12,17 @@ exports.create = (req, res) => {
     //     return;
     // }
 
-    // Create a User
-    const user = {
-        name: req.body.name,
-        email: req.body.email,
-        password: req.body.password,
-        lastSpotId: req.body.lastSpotId,
-        userTemperature: req.body.userTemperature,
-        userHumidity: req.body.userHumidity,
-        userAirflow: req.body.userAirflow,
-        leavingTime: req.body.leavingTime
-
+    // Create a Spot
+    const spot = {
+        spotId: req.body.spotId,
+        userId: req.body.userId,
+        currTemperature: req.body.currTemperature,
+        currHumidity: req.body.currHumidity,
+        currAirflow: req.body.currAirflow
     };
 
-    // Save User in the database
-    User.create(user)
+    // Save Spot in the database
+    Spot.create(spot)
         .then(data => {
             res.send(data);
         })
@@ -40,10 +36,10 @@ exports.create = (req, res) => {
 
 // Retrieve all Tutorials from the database.
 exports.findAll = (req, res) => {
-    const userId = req.query.userId;
-    var condition = userId ? {userId: {[Op.like]: `%${userId}%`}} : null;
+    const spotId = req.query.spotId;
+    var condition = spotId ? {spotId: {[Op.like]: `%${spotId}%`}} : null;
 
-    User.findAll({where: condition})
+    Spot.findAll({where: condition})
         .then(data => {
             res.send(data);
         })

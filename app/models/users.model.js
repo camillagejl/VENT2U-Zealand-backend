@@ -1,5 +1,5 @@
 module.exports = (sequelize, Sequelize) => {
-    const Users = sequelize.define("user", {
+    return sequelize.define("user", {
         userId: {
             type: Sequelize.INTEGER, unique: true, allowNull: false, primaryKey: true, autoIncrement: true
         },
@@ -7,16 +7,16 @@ module.exports = (sequelize, Sequelize) => {
             type: Sequelize.STRING, allowNull: false
         },
         email: {
-            type: Sequelize.STRING, unique: true, allowNull: false
+            type: Sequelize.STRING, unique: true, allowNull: false,
+            validate: {
+                isEmail: true
+            }
         },
         password: {
             type: Sequelize.STRING, allowNull: false
         },
         lastSpotId: {
             type: Sequelize.STRING
-        },
-        lastPresetId: {
-            type: Sequelize.INTEGER
         },
         userTemperature: {
             type: Sequelize.INTEGER
@@ -31,6 +31,4 @@ module.exports = (sequelize, Sequelize) => {
             type: Sequelize.TIME
         }
     });
-
-    return Users;
 };
