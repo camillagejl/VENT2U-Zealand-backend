@@ -12,7 +12,10 @@ app.use(cors());
 app.use(cors(corsOptions));*/
 const db = require("./app/models");
 
-db.sequelize.sync({ force: true });
+// Use this with force: true if you want to edit properly in this project
+// db.sequelize.sync({ force: true });
+
+db.sequelize.sync();
 
 // parse requests of content-type - application/json
 app.use(bodyParser.json());
