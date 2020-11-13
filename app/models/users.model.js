@@ -20,6 +20,10 @@ module.exports = (sequelize, Sequelize) => {
             allowNull: true,
             // references: {model: sequelize.models.spot, key: 'spotId'}
         },
+        askLastSpot: {
+            type: Sequelize.BOOLEAN,
+            allowNull: false
+        },
         userTemperature: {
             type: Sequelize.INTEGER
         },

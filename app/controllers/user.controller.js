@@ -18,6 +18,7 @@ exports.create = (req, res) => {
         email: req.body.email,
         password: req.body.password,
         lastSpotId: req.body.lastSpotId,
+        askLastSpot: req.body.askLastSpot,
         userTemperature: req.body.userTemperature,
         userHumidity: req.body.userHumidity,
         userAirflow: req.body.userAirflow,
