@@ -1,5 +1,5 @@
 module.exports = (sequelize, Sequelize) => {
-    return sequelize.define("preset", {
+    const preset = sequelize.define("preset", {
         presetId: {
             type: Sequelize.INTEGER,
             unique: true,
@@ -14,7 +14,6 @@ module.exports = (sequelize, Sequelize) => {
         userId: {
             type: Sequelize.INTEGER,
             required: true,
-            allowNull: false,
             references: {model: sequelize.models.user, key: 'userId'}
         },
         temperature: {
@@ -27,4 +26,6 @@ module.exports = (sequelize, Sequelize) => {
             type: Sequelize.INTEGER
         }
     });
+
+    return preset;
 };

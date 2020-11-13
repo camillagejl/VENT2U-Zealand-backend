@@ -2,7 +2,7 @@ const db = require("../models");
 const Preset = db.presets;
 const Op = db.Sequelize.Op;
 
-// Create and Save a new Tutorial
+// Create and Save a new Preset
 exports.create = (req, res) => {
     // Validate request
     // if (!req.body.name) {
@@ -19,7 +19,6 @@ exports.create = (req, res) => {
         temperature: req.body.temperature,
         humidity: req.body.humidity,
         airflow: req.body.airflow
-
     };
 
     // Save Preset in the database
@@ -30,12 +29,12 @@ exports.create = (req, res) => {
         .catch(err => {
             res.status(500).send({
                 message:
-                    err.message || "Some error occurred while creating the Tutorial."
+                    err.message || "Some error occurred while creating the Preset."
             });
         });
 };
 
-// Retrieve all Tutorials from the database.
+// Retrieve all Presets from the database.
 exports.findAll = (req, res) => {
     const presetId = req.query.presetId;
     var condition = presetId ? {presetId: {[Op.like]: `%${presetId}%`}} : null;
@@ -53,82 +52,82 @@ exports.findAll = (req, res) => {
 
 };
 //
-// // Find a single Tutorial with an id
-// exports.findOne = (req, res) => {
-//     const id = req.params.id;
-//
-//     Tutorial.findByPk(id)
-//         .then(data => {
-//             res.send(data);
-//         })
-//         .catch(err => {
-//             res.status(500).send({
-//                 message: "Error retrieving Tutorial with id=" + id
-//             });
-//         });
-//
-// };
-//
-// // Update a Tutorial by the id in the request
-// exports.update = (req, res) => {
-//     const id = req.params.id;
-//
-//     Tutorial.update(req.body, {
-//         where: {id: id}
-//     })
-//         .then(num => {
-//             if (num == 1) {
-//                 res.send({
-//                     message: "Tutorial was updated successfully."
-//                 });
-//             } else {
-//                 res.send({
-//                     message: `Cannot update Tutorial with id=${id}. Maybe Tutorial was not found or req.body is empty!`
-//                 });
-//             }
-//         })
-//         .catch(err => {
-//             res.status(500).send({
-//                 message: "Error updating Tutorial with id=" + id
-//             });
-//         });
-//
-// };
-//
-// // Delete a Tutorial with the specified id in the request
+// Find a single Preset with an id
+exports.findOne = (req, res) => {
+    const id = req.params.id;
+
+    Preset.findByPk(id)
+        .then(data => {
+            res.send(data);
+        })
+        .catch(err => {
+            res.status(500).send({
+                message: "Error retrieving Preset with id=" + id
+            });
+        });
+
+};
+
+// Update a Preset by the id in the request
+exports.update = (req, res) => {
+    const id = req.params.id;
+
+    Preset.update(req.body, {
+        where: {presetId: id}
+    })
+        .then(num => {
+            if (num == 1) {
+                res.send({
+                    message: "Preset was updated successfully."
+                });
+            } else {
+                res.send({
+                    message: `Cannot update Preset with id=${id}. Maybe Preset was not found or req.body is empty!`
+                });
+            }
+        })
+        .catch(err => {
+            res.status(500).send({
+                message: "Error updating Preset with id=" + id
+            });
+        });
+
+};
+
+// // Delete a Preset with the specified id in the request
 // exports.delete = (req, res) => {
 //     const id = req.params.id;
 //
-//     Tutorial.destroy({
+//     Preset.destroy({
 //         where: {id: id}
 //     })
 //         .then(num => {
 //             if (num == 1) {
 //                 res.send({
-//                     message: "Tutorial was deleted successfully!"
+//                     message: "Preset was deleted successfully!"
 //                 });
 //             } else {
 //                 res.send({
-//                     message: `Cannot delete Tutorial with id=${id}. Maybe Tutorial was not found!`
+//                     message: `Cannot delete Preset with id=${id}. Maybe Preset was not found!`
 //                 });
 //             }
 //         })
 //         .catch(err => {
 //             res.status(500).send({
-//                 message: "Could not delete Tutorial with id=" + id
+//                 message: "Could not delete Preset with id=" + id
 //             });
 //         });
 //
 // };
 //
-// // Delete all Tutorials from the database.
+// // Delete all Presets from the database.
 // exports.deleteAll = (req, res) => {
-//     Tutorial.destroy({
+//     Preset.destroy({
 //         where: {},
 //         truncate: false
 //     })
 //         .then(nums => {
-//             res.send({message: `${nums} Tutorials were deleted successfully!`});
+//             res.send({message: `${nums} Presets were deleted successfully!`});
 //         })
 //         .catch(err => {
 //             res.status(500).send({
@@ -139,9 +138,9 @@ exports.findAll = (req, res) => {
 //
 // };
 //
-// // Find all published Tutorials
+// // Find all published Presets
 // exports.findAllPublished = (req, res) => {
-//     Tutorial.findAll({where: {published: true}})
+//     Preset.findAll({where: {published: true}})
 //         .then(data => {
 //             res.send(data);
 //         })

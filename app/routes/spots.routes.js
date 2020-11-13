@@ -13,10 +13,10 @@ module.exports = app => {
     // router.get("/published", spots.findAllPublished);
     //
     // // Retrieve a single Tutorial with id
-    // router.get("/:id", spots.findOne);
+    router.get("/:id", spots.findOne);
     //
     // // Update a Tutorial with id
-    // router.put("/:id", spots.update);
+    router.put("/:id", spots.update);
     //
     // // Delete a Tutorial with id
     // router.delete("/:id", spots.delete);

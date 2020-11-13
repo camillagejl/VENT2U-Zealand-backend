@@ -13,10 +13,10 @@ module.exports = app => {
     // router.get("/published", presets.findAllPublished);
     //
     // // Retrieve a single Tutorial with id
-    // router.get("/:id", presets.findOne);
+    router.get("/:id", presets.findOne);
     //
     // // Update a Tutorial with id
-    // router.put("/:id", presets.update);
+    router.put("/:id", presets.update);
     //
     // // Delete a Tutorial with id
     // router.delete("/:id", presets.delete);
