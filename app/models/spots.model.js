@@ -9,7 +9,6 @@ module.exports = (sequelize, Sequelize) => {
         userId: {
             type: Sequelize.INTEGER,
             unique: true,
-            allowNull: false,
             references: {model: sequelize.models.user, key: 'userId'}
         },
         currTemperature: {
