@@ -1,18 +1,17 @@
-// Maybe not needed idk - const mysql = require('mysql');
+const mysql = require('mysql');
 const express = require('express');
 const session = require('express-session');
 const bodyParser = require('body-parser');
 const path = require('path');
-
 const app = express();
 
-/* var connection = mysql.createConnection({
-	host     : 'localhost',
-	user     : 'root',
-	password : '',
-	database : 'vent2db'
+const connection = mysql.createConnection({
+    host: 'localhost',
+    user: 'root',
+    password: '',
+    database: 'vent2udb'
 });
-*/
+
 
 app.use(session({
     secret: 'secret',
@@ -30,7 +29,7 @@ app.get('/', function (request, response) {
 });
 
 // POST Request - It checks if the details are correct in the DB
-app.post('/auth', function (request, response) {
+app.post('/home', function (request, response) {
     var email = request.body.email;
     var password = request.body.password;
     if (email && password) {
@@ -51,7 +50,7 @@ app.post('/auth', function (request, response) {
 });
 
 // This path gets displayed when the user successfully has logged in - path is placeholder for now
-app.get('/home', function (request, response) {
+app.get('/startup-select-spot', function (request, response) {
     if (request.session.loggedin) {
         response.send('Welcome back, ' + request.session.name + '!');
     } else {
@@ -59,3 +58,5 @@ app.get('/home', function (request, response) {
     }
     response.end();
 });
+
+app.listen(3307);
