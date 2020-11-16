@@ -33,8 +33,7 @@ exports.create = (req, res) => {
         })
         .catch(err => {
             res.status(500).send({
-                message:
-                    err.message || "Some error occurred while creating the User."
+                message: err.message || "Some error occurred while creating the User."
             });
         });
 };
@@ -42,16 +41,21 @@ exports.create = (req, res) => {
 // Retrieve all Users from the database.
 exports.findAll = (req, res) => {
     const userId = req.query.userId;
-    var condition = userId ? {userId: {[Op.like]: `%${userId}%`}} : null;
+    var condition = userId ? {
+        userId: {
+            [Op.like]: `%${userId}%`
+        }
+    } : null;
 
-    User.findAll({where: condition})
+    User.findAll({
+            where: condition
+        })
         .then(data => {
             res.send(data);
         })
         .catch(err => {
             res.status(500).send({
-                message:
-                    err.message || "Some error occurred while retrieving tutorials."
+                message: err.message || "Some error occurred while retrieving tutorials."
             });
         });
 
@@ -79,8 +83,10 @@ exports.update = (req, res) => {
     const id = req.params.id;
 
     User.update(req.body, {
-        where: {userId: id}
-    })
+            where: {
+                userId: id
+            }
+        })
         .then(num => {
             if (num == 1) {
                 res.send({
@@ -99,6 +105,9 @@ exports.update = (req, res) => {
         });
 
 };
+
+
+
 //
 // // Delete a User with the specified id in the request
 // exports.delete = (req, res) => {
